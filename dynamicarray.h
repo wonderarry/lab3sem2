@@ -1,6 +1,7 @@
 #include <cassert>
 #include <string>
 #include <fstream>
+#include <iostream>
 template <typename T>  class DynamicArray {
 protected:
     T *data;
@@ -413,13 +414,17 @@ public:
             std::cin >> temp;
             obtainedSequence.InsertAt(obtainedSequence.GetSize(), temp);
         }
-        SubheapExtraction(obtainedSequence.Get(0), true);
-        for (int i = 0; i < length; ++i){
-            if (obtainedSequence.Get(i) != this->subheapKeeper->Get(i)){
-                return false;
+        if (this->data->LookFor(obtainedSequence.Get(0)) != -1){
+            SubheapExtraction(this->data->LookFor(obtainedSequence.Get(0)), true);
+            for (int i = 0; i < length; ++i){
+                if (obtainedSequence.Get(i) != this->subheapKeeper->Get(i)){
+                    return false;
+                }
             }
+            return true;
         }
-        return true;
-    }
+        return false;
+        }
+
 
 }
